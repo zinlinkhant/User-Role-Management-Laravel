@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('password');
             $table->boolean('gender')->default(0);
             $table->boolean('active')->default(1);
+            $table->foreignId('role_id')->default(1)->constrained()->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });
