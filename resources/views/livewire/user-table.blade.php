@@ -44,7 +44,14 @@
                             </select>
                         </td>
                         <td class="px-4 py-2 text-center">
-                            <input type="checkbox" wire:model="active" class="h-5 w-5 text-indigo-600 rounded">
+
+                            @if ($active == 1)
+                                <input type="checkbox" value="1" wire:model="active"
+                                    class="h-5 w-5 text-indigo-600 rounded" checked>
+                            @else
+                                <input type="checkbox" value="1" wire:model="active"
+                                    class="h-5 w-5 text-indigo-600 rounded">
+                            @endif
                         </td>
                         <td class="px-4 py-2">
                             <button type="submit" wire:click="store"
@@ -63,6 +70,14 @@
     @endif
 
     <!-- User Table -->
+    <div class=" mb-2 flex justify-between">
+        <div></div>
+        <div>
+            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" wire:click="showAll">Show All</button>
+            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                wire:click="toggleActive">{{ $isActive ? 'Inactive' : 'Active' }}</button>
+        </div>
+    </div>
     <table class="min-w-full bg-white border border-gray-300 shadow-lg shadow-slate-400">
         <thead>
             <tr class="bg-gray-200">

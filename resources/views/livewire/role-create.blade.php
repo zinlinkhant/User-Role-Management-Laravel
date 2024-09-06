@@ -1,4 +1,4 @@
-<div class="p-6 bg-white shadow-md rounded">
+<div class="p-6 bg-white shadow-md rounded w-fit mx-auto">
     @if (session()->has('message'))
         <div class="bg-green-500 text-white p-3 rounded mb-4">
             {{ session('message') }}
@@ -9,7 +9,7 @@
         <div class="mb-4">
             <label for="name" class="block text-gray-700">Role Name:</label>
             <input type="text" id="name" wire:model="name"
-                class="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                class="form-input mt-1 block  border-gray-300 rounded-md shadow-sm w-fit border">
             @error('name')
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
@@ -19,4 +19,14 @@
             Create Role
         </button>
     </form>
+
+    <div class="flex">
+        @foreach ($permissions as $per)
+            <div class="m-2 px-4 py-2 rounded border w-fit">
+                {{ $per->name }}
+                <input type="checkbox" wire:click="addPermission({{ $per->id }})">
+            </div>
+        @endforeach
+    </div>
+
 </div>

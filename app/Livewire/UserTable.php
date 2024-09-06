@@ -11,6 +11,7 @@ class UserTable extends Component
     use WithPagination;
     public $userId, $name, $email, $username, $phone, $address, $gender, $active;
     public $isEditing = false;
+    public $isActive = null;
 
     public function mount() {}
     public function cancel()
@@ -55,11 +56,24 @@ class UserTable extends Component
         $this->mount(); // Refresh users list
     }
 
+    public function toggleActive()
+    {
+        $this->isActive = !$this->isActive;
+    }
+    public function showAll()
+    {
+        $this->isActive = null;
+    }
+
 
     public function render()
     {
+        $users = $this->isActive === null
+            ? User::paginate(10)
+            : User::where('active', $this->isActive)->paginate(10);
+
         return view('livewire.user-table', [
-            'users' => User::paginate(10) // Pagination logic
+            'users' => $users
         ]);
     }
 }
