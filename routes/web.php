@@ -25,3 +25,6 @@ Route::get('/roles', function () {
 Route::get('/permissions', function () {
     return view('permission');
 });
+Route::get('/features', function () {
+    return view('feature');
+});

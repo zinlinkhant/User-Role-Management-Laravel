@@ -1,3 +1,4 @@
 <div>
-    {{-- Do your work, then step back. --}}
+    <livewire:permission-create />
+    <livewire:permission-table />
 </div>
