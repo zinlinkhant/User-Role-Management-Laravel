@@ -13,7 +13,7 @@ class PermissionCreate extends Component
     public $features; // List of features for the dropdown
 
     protected $rules = [
-        'name' => 'required|string|max:255|unique:permissions,name',
+        'name' => 'required|string|max:255',
         'feature_id' => 'required|exists:features,id',
     ];
 

@@ -19,11 +19,9 @@ class RoleCreate extends Component
 
     public function mount()
     {
-        // Initialize permissions in mount method
         $this->permissions = Permission::all();
     }
 
-    // Add permission ID to array when selected
     public function addPermission($id)
     {
         if (!in_array($id, $this->perId)) {
@@ -31,7 +29,6 @@ class RoleCreate extends Component
         }
     }
 
-    // Assign selected permissions to the newly created role
     public function addPermissionToTable($roleId)
     {
         foreach ($this->perId as $id) {
@@ -44,21 +41,19 @@ class RoleCreate extends Component
 
     public function store()
     {
-        $this->validate();
+        $this->validate($this->rules);
 
-        // Create role and store it
         $role = Role::create([
             'name' => $this->name,
         ]);
 
-        // Add permissions to the role
         $this->addPermissionToTable($role->id);
 
         $this->dispatch(event: 'roleCreated');
         session()->flash('message', 'Role created successfully.');
 
-        // Reset the input fields and permission selection
         $this->reset(['name', 'perId']);
+        $this->dispatch('roleCreated');
     }
 
     public function render()

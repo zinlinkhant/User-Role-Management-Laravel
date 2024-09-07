@@ -24,7 +24,7 @@ class FeatureCreate extends Component
         session()->flash('message', 'Feature created successfully.');
 
         $this->reset('name');
-        $this->dispatch('featureCreated'); // Emit event to refresh the table component
+        $this->dispatch('featureCreated');
     }
 
     public function render()

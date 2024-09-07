@@ -1,4 +1,7 @@
-<div>
+<div class="p-6 bg-slate-300">
     <livewire:permission-create />
-    <livewire:permission-table />
+    <div class="mt-10">
+
+        <livewire:permission-table />
+    </div>
 </div>

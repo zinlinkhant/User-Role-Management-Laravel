@@ -6,23 +6,15 @@
                 <input type="text" wire:model="name" id="name" class="border px-4 py-2 rounded w-full">
             </div>
 
-            <div class="mt-5">
-                <label for="permissions">Permissions</label>
-                <ul class="flex gap-4">
-                    @foreach ($permissions as $permission)
-                        <li>
-                            <input type="checkbox" wire:model="permissionsSelected" value="{{ $permission->id }}">
-                            {{ $permission->name }}
-                        </li>
-                    @endforeach
-                </ul>
-            </div>
-            {{-- <button class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Add Permissions</button>
-            @if ($permissinAdd)
+            <label for="permissions">Permissions</label>
+            <ul class="flex gap-4">
                 @foreach ($allPermissions as $permission)
-                    <input type="text">
+                    <li>
+                        <input type="checkbox" wire:model="permissionsSelected" value="{{ $permission->id }}">
+                        {{ $permission->name }}
+                    </li>
                 @endforeach
-            @endif --}}
+            </ul>
             <div class="mt-5">
                 <button type="submit" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
                     Update
@@ -34,6 +26,10 @@
             </div>
         </form>
     @endif
+
+
+
+
     <h1 class="w-fit px-5 py-2 text-2xl rounded-lg mt-20 bg-white mb-5">Role Data Table</h1>
     <table class="min-w-full bg-white border border-gray-300 shadow-lg shadow-slate-400">
         <thead>

@@ -11,6 +11,7 @@
                     <th class="px-4 py-3">Address</th>
                     <th class="px-4 py-3">Gender</th>
                     <th class="px-4 py-3">Active</th>
+                    <th class="px-4 py-3">Role</th>
                     <th class="px-4 py-3">Actions</th>
                 </tr>
             </thead>
@@ -44,14 +45,16 @@
                             </select>
                         </td>
                         <td class="px-4 py-2 text-center">
-
-                            @if ($active == 1)
-                                <input type="checkbox" value="1" wire:model="active"
-                                    class="h-5 w-5 text-indigo-600 rounded" checked>
-                            @else
-                                <input type="checkbox" value="1" wire:model="active"
-                                    class="h-5 w-5 text-indigo-600 rounded">
-                            @endif
+                            <input type="checkbox" value="1" wire:model="active"
+                                class="h-5 w-5 text-indigo-600 rounded" {{ $active == 1 ? 'checked' : '' }}>
+                        </td>
+                        <td class="px-4 py-2">
+                            <!-- Role Selection -->
+                            <select wire:model="role_id" class="w-full px-4 py-2 border rounded-lg">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
                         </td>
                         <td class="px-4 py-2">
                             <button type="submit" wire:click="store"
@@ -68,6 +71,7 @@
             </tbody>
         </table>
     @endif
+
 
     <!-- User Table -->
     <div class=" mb-2 flex justify-between">
@@ -88,6 +92,7 @@
                 <th class="px-4 py-2">Address</th>
                 <th class="px-4 py-2">Gender</th>
                 <th class="px-4 py-2">Active</th>
+                <th class="px-4 py-2">Role</th>
                 <th class="px-4 py-2">Actions</th>
             </tr>
         </thead>
@@ -101,6 +106,7 @@
                     <td class="px-4 py-2 text-center">{{ $user->address }}</td>
                     <td class="px-4 py-2 text-center">{{ $user->gender ? 'Male' : 'Female' }}</td>
                     <td class="px-4 py-2 text-center">{{ $user->active ? 'Yes' : 'No' }}</td>
+                    <td class="px-4 py-2 text-center">{{ $user->role->name }}</td>
                     <td class="px-4 py-2 text-center">
                         <button wire:click="edit({{ $user->id }})"
                             class="bg-yellow-500 text-white px-2 py-1 rounded">Edit</button>

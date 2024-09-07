@@ -2,18 +2,26 @@
 
 namespace App\Livewire;
 
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class UserTable extends Component
 {
     use WithPagination;
-    public $userId, $name, $email, $username, $phone, $address, $gender, $active;
+    public $userId, $name, $email, $username, $phone, $address, $gender, $active, $role_id;
     public $isEditing = false;
     public $isActive = null;
+    protected $listeners = ['userCreated' => '$refresh', 'userUpdated' => '$refresh', 'userDeleted' => '$refresh'];
+    public $roles;
 
-    public function mount() {}
+
+    public function mount()
+    {
+        $this->roles = Role::all();
+    }
     public function cancel()
     {
         $this->isEditing = false;
@@ -24,6 +32,7 @@ class UserTable extends Component
         $user = User::findOrFail($id);
         $user->delete();
         $this->mount();
+        $this->dispatch('userDeleted');
     }
     public function edit($id)
     {
@@ -38,9 +47,25 @@ class UserTable extends Component
         $this->address = $user->address;
         $this->gender = $user->gender;
         $this->active = $user->active;
+        $this->role_id = $user->role_id;
     }
     public function store()
     {
+        $this->validate([
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($this->userId),
+            ],
+            'username' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'gender' => 'required|in:0,1',
+            'active' => 'boolean',
+            'role_id' => 'required|exists:roles,id',
+        ]);
+
         $user = User::find($this->userId);
         $user->update([
             'name' => $this->name,
@@ -50,10 +75,13 @@ class UserTable extends Component
             'address' => $this->address,
             'gender' => $this->gender,
             'active' => $this->active,
+            'role_id' => $this->role_id,
         ]);
 
+
         $this->isEditing = false;
-        $this->mount(); // Refresh users list
+        $this->reset(); // Clear form fields
+        $this->dispatch('userUpdated');
     }
 
     public function toggleActive()

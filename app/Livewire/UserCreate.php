@@ -22,8 +22,7 @@ class UserCreate extends Component
 
     public function store()
     {
-        $this->validate();
-
+        $this->validate($this->rules);
         User::create([
             'name' => $this->name,
             'username' => $this->username,
@@ -32,6 +31,7 @@ class UserCreate extends Component
         ]);
 
         session()->flash('message', 'User created successfully.');
+        $this->dispatch('userCreated');
 
         $this->resetForm();
     }
