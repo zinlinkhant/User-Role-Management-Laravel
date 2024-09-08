@@ -11,7 +11,7 @@
                 @foreach ($allPermissions as $permission)
                     <li>
                         <input type="checkbox" wire:model="permissionsSelected" value="{{ $permission->id }}">
-                        {{ $permission->name }}
+                        {{ $permission->feature->name }} {{ $permission->name }}
                     </li>
                 @endforeach
             </ul>
@@ -46,7 +46,8 @@
                     <td class="text-center px-4 py-2 border-b flex justify-center">
                         <ul class=" ml-5 flex gap-4">
                             @foreach ($role->permissions as $per)
-                                <li class="border px-2 py-1 border-slate-400 rounded">{{ $per->name }}</li>
+                                <li class="border px-2 py-1 border-slate-400 rounded">{{ $per->feature->name }}
+                                    {{ $per->name }}</li>
                             @endforeach
                         </ul>
                     </td>

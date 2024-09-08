@@ -23,7 +23,7 @@
     <div class="flex">
         @foreach ($permissions as $per)
             <div class="m-2 px-4 py-2 rounded border w-fit">
-                {{ $per->name }}
+                {{ $per->feature->name }} {{ $per->name }}
                 <input type="checkbox" wire:click="addPermission({{ $per->id }})">
             </div>
         @endforeach
