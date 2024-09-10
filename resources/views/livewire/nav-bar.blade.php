@@ -7,6 +7,9 @@
 
         <!-- Navigation Buttons -->
         <div class="space-x-4">
+            <a href="{{ route('register') }}" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                Register
+            </a>
             <a href="{{ route('user') }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                 User
             </a>

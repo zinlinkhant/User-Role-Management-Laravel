@@ -1,6 +1,6 @@
 @include('layouts.app')
 <div>
-    <livewire:nav-bar>
+    <livewire:layout.navigation />
 
-        <livewire:permission-form />
+    <livewire:permission-form />
 </div>

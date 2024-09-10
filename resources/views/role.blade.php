@@ -1,3 +1,3 @@
 @extends('layouts.app')
-<livewire:nav-bar>
-    <livewire:role-form />
+<livewire:layout.navigation />
+<livewire:role-form />

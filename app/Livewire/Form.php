@@ -9,8 +9,8 @@ use Livewire\WithPagination;
 
 class Form extends Component
 {
-    public $create = true;
-    public $btnText = "user create hide";
+    public $create = false;
+    public $btnText = "user create show";
     function toggleCreate()
     {
         $this->create = !$this->create;
