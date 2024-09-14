@@ -94,6 +94,10 @@ class UserTable extends Component
     {
         $this->isActive = null;
     }
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
 
     public function render()
