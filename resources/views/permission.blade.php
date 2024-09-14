@@ -1,6 +1,8 @@
-@include('layouts.app')
-<div>
-    <livewire:layout.navigation />
+<x-header>
+    <div>
+        <livewire:layout.navigation />
 
-    <livewire:permission-form />
-</div>
+        <livewire:permission-form />
+    </div>
+
+</x-header>

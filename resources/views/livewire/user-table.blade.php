@@ -75,7 +75,11 @@
 
     <!-- User Table -->
     <div class=" mb-2 flex justify-between">
-        <div></div>
+        <div class="flex h-fit items-center">
+            <input type="text" class="w-full px-4 py-2 border rounded-lg h-fit" wire:model.debounce.500ms="search"
+                placeholder="search name or email">
+            <p>{{ $search }}</p>
+        </div>
         <div>
             <button class="px-4 py-2 bg-blue-500 text-white rounded-lg" wire:click="showAll">Show All</button>
             <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"

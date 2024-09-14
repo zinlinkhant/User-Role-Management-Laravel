@@ -16,6 +16,8 @@ class UserTable extends Component
     public $isActive = null;
     protected $listeners = ['userCreated' => '$refresh', 'userUpdated' => '$refresh', 'userDeleted' => '$refresh'];
     public $roles;
+    public $search = '';
+
 
 
     public function mount()
@@ -96,9 +98,23 @@ class UserTable extends Component
 
     public function render()
     {
-        $users = $this->isActive === null
-            ? User::paginate(10)
-            : User::where('active', $this->isActive)->paginate(10);
+        $query = User::query();
+
+        // Apply the `isActive` filter if it's not null
+        if ($this->isActive !== null) {
+            $query->where('active', $this->isActive);
+        }
+
+        // Apply the search filter if search input is provided
+        if (!empty($this->search)) {
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%' . $this->search . '%')
+                    ->orWhere('email', 'like', '%' . $this->search . '%');
+            });
+        }
+
+        // Paginate the results
+        $users = $query->paginate(10);
 
         return view('livewire.user-table', [
             'users' => $users
